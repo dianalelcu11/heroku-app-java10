@@ -1,4 +1,4 @@
-package ro.siit;
+package ro.siit.login;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,12 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/entity"})
-public class EntityServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/logout"})
 
+public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json");
-        resp.getWriter().println("{message: \"Hello world\"}");
+        req.getSession().removeAttribute("authenticated");
+        resp.sendRedirect(req.getContextPath() + "/login");
     }
+
 }
